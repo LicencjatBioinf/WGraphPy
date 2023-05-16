@@ -2,9 +2,9 @@ from WGraphPy import *
 import heapq
 
 
-def wsearch(fastas, eksperymentalne, limit, results_max_size=10):
-    heap = [WGraphPy(fasta=fastas[0][0], name=fastas[0][1], node_list=eksperymentalne)]
-    for fasta, name in fastas[1:]:
+def wsearch(fasta_list, experimental, limit, results_max_size=10):
+    heap = [WGraphPy(fasta=fasta_list[0][0], name=fasta_list[0][1], node_list=experimental)]
+    for fasta, name in fasta_list[1:]:
         heap.append(WGraphPy(fasta=fasta, name=name, graph=heap[0].graph))
     heapq.heapify(heap)
     results = []
