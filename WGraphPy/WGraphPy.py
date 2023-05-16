@@ -10,6 +10,10 @@ class WGraphPy(object):
     __slots__ = ['name', 'peakGenerator', 'graph']
 
     def __init__(self, *args, name=None, fasta=None, node_list=None, graph=None):
+        # Initializes a new instance of WGraphPy
+        # 'fasta' is used to create an IsoLayeredGenerator object
+        # 'node_list' is a list of nodes to add to the graph
+        # 'graph' can be passed to use an existing graph instance
         try:
             self.peakGenerator = iter(IsoSpecPy.IsoLayeredGenerator(fasta=fasta))
         except Exception:
@@ -23,6 +27,7 @@ class WGraphPy(object):
         self.name = name
 
     def add_inflow(self):
+        # Adds an inflow node to the graph using the next value from the peakGenerator
         try:
             node = next(self.peakGenerator)
             self.graph.add_inflow(*node)
@@ -30,6 +35,7 @@ class WGraphPy(object):
             print(e)
 
     def __float__(self):
+        # Returns the Wasserstein distance as a floating-point value
         return self.graph.wdist
 
     def __str__(self):
